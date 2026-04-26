@@ -30,7 +30,154 @@
         </div>
       </div>
     </section>
-    <section class="game game-Page"></section>
+    <section class="game game-Page show-question">
+      <!-- ─── QUESTION SCREEN ──────────────────────────────────── -->
+      <div class="game-screen question-screen">
+        <!-- Top HUD bar -->
+        <div class="game-hud">
+          <div class="hud-left">
+            <div class="hud-label">Question</div>
+            <div class="hud-val" id="q-counter">07 / 20</div>
+          </div>
+
+          <div class="hud-center">
+            <!-- Timer ring -->
+            <div class="timer-ring" id="timer-ring">
+              <svg viewBox="0 0 64 64">
+                <circle class="ring-track" cx="32" cy="32" r="28" />
+                <circle
+                  class="ring-fill"
+                  cx="32"
+                  cy="32"
+                  r="28"
+                  stroke-dasharray="175.9"
+                  stroke-dashoffset="0"
+                  id="ring-fill"
+                />
+              </svg>
+              <span class="timer-num" id="timer-num">30</span>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <div class="hud-label">Score</div>
+            <div class="hud-val" id="live-score">1 840</div>
+          </div>
+        </div>
+
+        <!-- Category / difficulty badge -->
+        <div class="q-meta">
+          <span class="q-cat">History</span>
+          <span class="q-dot">·</span>
+          <span class="q-diff hard">Hard</span>
+        </div>
+
+        <!-- The question -->
+        <div class="q-bubble">
+          <p class="q-text" id="question-text">
+            Which Roman emperor issued the Edict of Milan in 313 AD, granting
+            religious tolerance throughout the empire?
+          </p>
+        </div>
+
+        <!-- Streak indicator -->
+        <div class="streak-bar" id="streak-bar">
+          <span class="streak-label">Streak</span>
+          <div class="streak-pips">
+            <div class="pip active"></div>
+            <div class="pip active"></div>
+            <div class="pip active"></div>
+            <div class="pip"></div>
+            <div class="pip"></div>
+          </div>
+          <span class="streak-mult" id="streak-mult">×3</span>
+        </div>
+
+        <!-- Answer choices -->
+        <div class="choices-grid" id="choices-grid">
+          <button class="choice-btn" data-idx="0">
+            <span class="choice-key">A</span>
+            <span class="choice-text">Nero</span>
+          </button>
+          <button class="choice-btn" data-idx="1">
+            <span class="choice-key">B</span>
+            <span class="choice-text">Constantine I</span>
+          </button>
+          <button class="choice-btn" data-idx="2">
+            <span class="choice-key">C</span>
+            <span class="choice-text">Diocletian</span>
+          </button>
+          <button class="choice-btn" data-idx="3">
+            <span class="choice-key">D</span>
+            <span class="choice-text">Hadrian</span>
+          </button>
+        </div>
+      </div>
+      <!-- /question-screen -->
+
+      <!-- ─── ANSWER SCREEN ────────────────────────────────────── -->
+      <div class="game-screen answer-screen">
+        <!-- Result banner -->
+        <div class="result-banner correct" id="result-banner">
+          <!-- swap class to "incorrect" when wrong -->
+          <div class="result-icon" id="result-icon">✓</div>
+          <div class="result-label" id="result-label">Correct!</div>
+        </div>
+
+        <!-- Points earned -->
+        <div class="points-earned" id="points-earned">
+          <span class="pts-num">+120</span>
+          <span class="pts-label">pts</span>
+          <span class="pts-bonus speed-bonus">⚡ speed bonus +20</span>
+        </div>
+
+        <!-- Correct answer callout -->
+        <div class="answer-callout">
+          <div class="callout-label">Correct answer</div>
+          <div class="callout-answer" id="correct-answer-text">
+            Constantine I
+          </div>
+        </div>
+
+        <!-- Explanation / fun fact -->
+        <div class="answer-explanation" id="answer-explanation">
+          <div class="explain-label">Did you know?</div>
+          <p class="explain-text">
+            Constantine I and his co-emperor Licinius jointly issued the Edict
+            of Milan, marking the first time an emperor officially tolerated
+            Christianity across the entire Roman Empire.
+          </p>
+        </div>
+
+        <!-- Player thumbnails (multiplayer) -->
+        <div class="answer-players" id="answer-players">
+          <div class="ans-player correct">
+            <div class="ans-avatar">W</div>
+            <div class="ans-name">Wassi</div>
+            <div class="ans-result">✓</div>
+          </div>
+          <div class="ans-player incorrect">
+            <div class="ans-avatar">I</div>
+            <div class="ans-name">Isiah</div>
+            <div class="ans-result">✗</div>
+          </div>
+          <div class="ans-player correct">
+            <div class="ans-avatar">P</div>
+            <div class="ans-name">Peter</div>
+            <div class="ans-result">✓</div>
+          </div>
+          <div class="ans-player timeout">
+            <div class="ans-avatar">E</div>
+            <div class="ans-name">Edly</div>
+            <div class="ans-result">—</div>
+          </div>
+        </div>
+
+        <!-- Next button -->
+        <button class="next-btn" id="next-btn">Next question →</button>
+      </div>
+      <!-- /answer-screen -->
+    </section>
     <section class="settings">
       <div class="settings-inner">
         <div class="settings-header">
@@ -151,7 +298,9 @@
           <div class="section-label">Answer Format</div>
           <div class="card">
             <div class="pill-group" id="format">
-              <div class="pill active blue" data-val="multiple">Multiple choice</div>
+              <div class="pill active blue" data-val="multiple">
+                Multiple choice
+              </div>
               <div class="pill" data-val="boolean">True / False</div>
             </div>
           </div>
@@ -249,9 +398,17 @@
               <div class="stat-row"><span>Streak</span><span>x2</span></div>
             </div>
           </div>
+
+          <div class="player-card empty-card">
+            <div class="plus-sign">+</div>
+          </div>
         </div>
       </div>
-      <button class="back-btn">← Back</button>
+      <div class="scores-BtnGroup">
+        <button class="reset-players-btn">Reset Current Players</button>
+        <button class="erase-players-btn">Full Wipe</button>
+        <button class="back-btn">← Back</button>
+      </div>
     </section>
     <script src="/js/questions.js"></script>
     <script src="/js/app.js"></script>
