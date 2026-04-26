@@ -8,14 +8,19 @@ A browser-based, multi-player trivia game with a polished dark UI, animated titl
 
 ```
 trivia-night/
-├── index.html        # All four screens (Home, Game, Settings, Scores)
+├── index.html              # All four screens (Home, Game, Settings, Scores)
+├── api.txt                 # API notes / endpoint reference
+├── ReadMe.md               # Project documentation
 ├── css/
-│   └── styles.css    # All styling — layout, animations, components
+│   └── styles.css          # All styling — layout, animations, components
+├── data/
+│   └── categories.js       # Category data and filtering logic
+├── Images (Inspiration)/
+│   └── image.png           # UI inspiration / reference image
 └── js/
-    ├── app.js        # Navigation logic, DOM selectors, event listeners
-    ├── categories.js # (planned) Category data and filtering logic
-    ├── questions.js  # (planned) Question bank and question loading
-    └── scoring.js    # (planned) Score calculation and streak logic
+    ├── app.js              # Navigation logic, DOM selectors, event listeners
+    ├── questions.js        # (planned) Question bank and question loading
+    └── scoring.js          # (planned) Score calculation and streak logic
 ```
 
 ---
