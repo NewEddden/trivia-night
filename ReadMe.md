@@ -4,7 +4,7 @@ A browser-based, multi-player trivia game with a polished dark UI, animated titl
 
 ---
 
-![Music Player Preview](my-main-screen.png)
+![Trivia Night Preview](<Images%20(Inspiration)/preview.png>)
 
 ## 📁 Project Structure
 
