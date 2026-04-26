@@ -93,7 +93,7 @@
               <div class="pill active green" data-val="easy">Easy</div>
               <div class="pill active" data-val="medium">Medium</div>
               <div class="pill active red" data-val="hard">Hard</div>
-              <div class="pill" data-val="mixed">Mixed</div>
+              <div class="pill" data-val="any">Any</div>
             </div>
           </div>
         </div>
@@ -102,16 +102,16 @@
           <div class="section-label">Categories</div>
           <div class="card">
             <div class="categories-grid" id="categories">
-              <div class="cat-pill active">History</div>
-              <div class="cat-pill active">Science</div>
-              <div class="cat-pill active">Sports</div>
-              <div class="cat-pill active">Pop Culture</div>
-              <div class="cat-pill">Geography</div>
-              <div class="cat-pill">Movies</div>
-              <div class="cat-pill">Music</div>
-              <div class="cat-pill">Technology</div>
-              <div class="cat-pill">Food</div>
-              <div class="cat-pill">Literature</div>
+              <div class="cat-pill active" data-id="23">History</div>
+              <div class="cat-pill active" data-id="17">Science</div>
+              <div class="cat-pill active" data-id="21">Sports</div>
+              <div class="cat-pill active" data-id="9">General Knowledge</div>
+              <div class="cat-pill" data-id="22">Geography</div>
+              <div class="cat-pill" data-id="11">Movies</div>
+              <div class="cat-pill" data-id="12">Music</div>
+              <div class="cat-pill" data-id="18">Technology</div>
+              <div class="cat-pill" data-id="20">Mythology</div>
+              <div class="cat-pill" data-id="10">Literature</div>
             </div>
           </div>
         </div>
@@ -151,9 +151,8 @@
           <div class="section-label">Answer Format</div>
           <div class="card">
             <div class="pill-group" id="format">
-              <div class="pill active blue" data-val="mc">Multiple choice</div>
-              <div class="pill" data-val="tf">True / False</div>
-              <div class="pill" data-val="type">Type in</div>
+              <div class="pill active blue" data-val="multiple">Multiple choice</div>
+              <div class="pill" data-val="boolean">True / False</div>
             </div>
           </div>
         </div>
@@ -254,6 +253,7 @@
       </div>
       <button class="back-btn">← Back</button>
     </section>
+    <script src="/js/questions.js"></script>
     <script src="/js/app.js"></script>
   </body>
 </html>

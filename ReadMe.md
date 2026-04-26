@@ -25,35 +25,39 @@ trivia-night/
 The app is structured as a single HTML page with four full-viewport `<section>` elements. Navigation is handled by smooth-scrolling between sections — no page reloads or routing.
 
 ### 1. Home Screen (`.home`)
+
 - Displays the animated **"Trivia Night"** logo
 - Three buttons: **Start Game**, **Settings**, **Scores**
 - Each button scrolls to the corresponding section
 
 ### 2. Game Screen (`.game`)
+
 - Currently an empty placeholder (`<section class="game game-Page">`)
 - Intended for question display, answer options, timer, and live scoring
 
 ### 3. Settings Screen (`.settings`)
+
 - Full configuration panel with the following options:
 
-| Setting | Type | Options |
-|---|---|---|
-| Questions | Range slider | 5 – 50 (step 5, default 20) |
-| Time per question | Range slider | 0 – 60s (step 5, default 30s; 0 = no limit) |
-| Players | Pill selector | 1, 2, 3, 4 |
-| Difficulty | Multi-pill toggle | Easy, Medium, Hard, Mixed |
-| Categories | Grid toggle | History, Science, Sports, Pop Culture, Geography, Movies, Music, Technology, Food, Literature |
-| Speed bonus | Toggle | On / Off (default On) |
-| Wrong answer penalty | Toggle | On / Off (default Off) |
-| Streak bonus | Toggle | On / Off (default On) |
-| Answer format | Pill selector | Multiple choice, True/False, Type in |
-| Sound effects | Toggle | On / Off (default On) |
-| Music | Toggle | On / Off (default On) |
+| Setting              | Type              | Options                                                                                       |
+| -------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
+| Questions            | Range slider      | 5 – 50 (step 5, default 20)                                                                   |
+| Time per question    | Range slider      | 0 – 60s (step 5, default 30s; 0 = no limit)                                                   |
+| Players              | Pill selector     | 1, 2, 3, 4                                                                                    |
+| Difficulty           | Multi-pill toggle | Easy, Medium, Hard, Mixed                                                                     |
+| Categories           | Grid toggle       | History, Science, Sports, Pop Culture, Geography, Movies, Music, Technology, Food, Literature |
+| Speed bonus          | Toggle            | On / Off (default On)                                                                         |
+| Wrong answer penalty | Toggle            | On / Off (default Off)                                                                        |
+| Streak bonus         | Toggle            | On / Off (default On)                                                                         |
+| Answer format        | Pill selector     | Multiple choice, True/False, Type in                                                          |
+| Sound effects        | Toggle            | On / Off (default On)                                                                         |
+| Music                | Toggle            | On / Off (default On)                                                                         |
 
 - **Save & Play** button scrolls to the game screen
 - **← Back** button returns to the home screen
 
 ### 4. Scores Screen (`.scores`)
+
 - Displays a post-game leaderboard with up to 4 player cards
 - Each card shows: rank badge, avatar initial, player name, total points, correct answers, average response time, and best streak
 - 1st place highlighted in gold, 2nd in silver, 3rd in bronze
@@ -65,18 +69,19 @@ The app is structured as a single HTML page with four full-viewport `<section>` 
 
 **Color palette:**
 
-| Color | Hex | Used for |
-|---|---|---|
-| Green | `#4a7c2f` | Title letters (T, N, t), toggle ON state |
-| Orange | `#e8940a` | Title letters (r, a, h), accents, 1st place, sliders |
-| Red | `#cc1f1f` | Title letters (i, i) |
-| Blue | `#1a5fa8` | Title letters (v, g) |
-| White | `#ffffff` | Title letter (i) |
-| Dark background | `#111` / `#000` | Page background, cards |
+| Color           | Hex             | Used for                                             |
+| --------------- | --------------- | ---------------------------------------------------- |
+| Green           | `#4a7c2f`       | Title letters (T, N, t), toggle ON state             |
+| Orange          | `#e8940a`       | Title letters (r, a, h), accents, 1st place, sliders |
+| Red             | `#cc1f1f`       | Title letters (i, i)                                 |
+| Blue            | `#1a5fa8`       | Title letters (v, g)                                 |
+| White           | `#ffffff`       | Title letter (i)                                     |
+| Dark background | `#111` / `#000` | Page background, cards                               |
 
 **Typography:** Georgia / Times New Roman serif for all UI elements.
 
 **Animations:**
+
 - Each letter in the "Trivia Night" title has a unique `clip-path` polygon that morphs continuously via per-letter `@keyframes` (`wobble-1`, `wobble-2`, `morph`). Animation durations are staggered (3.5s – 4.4s) with negative delays to desynchronize them for an organic, lively effect.
 - Buttons feature a rainbow animated glow border using a `background-size: 400%` gradient cycling via `@keyframes glowing-btn`.
 
@@ -89,6 +94,7 @@ Currently handles all navigation and UI interaction setup.
 **DOM selectors** are cached in a single `selectors` object at the top of the file for maintainability.
 
 **Navigation:**
+
 ```js
 selectors.startBtn   → scrolls to .game
 selectors.settingsBtn → scrolls to .settings
@@ -113,7 +119,7 @@ The game screen itself (`.game`) is also a blank placeholder — the core gamepl
 
 **Settings are UI-only** — the sliders, toggles, and pills work visually but their values are not yet read, validated, or passed anywhere when "Save & Play" is clicked.
 
----
+---t=50
 
 ## 🚀 Running the Project
 

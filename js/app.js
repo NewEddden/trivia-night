@@ -29,7 +29,32 @@ const scrollTo = (selector) => {
 selectors.startBtn.addEventListener("click", () => scrollTo(".game"));
 selectors.settingsBtn.addEventListener("click", () => scrollTo(".settings"));
 selectors.scoresBtn.addEventListener("click", () => scrollTo(".scores"));
-selectors.saveBtn.addEventListener("click", () => scrollTo(".game"));
+selectors.saveBtn.addEventListener("click", async () => {
+  const settings = window.TriviaQuestions.readSettings();
+  console.log("Settings saved:", settings);
+
+  scrollTo(".game");
+
+  try {
+    selectors.saveBtn.textContent = "Loading...";
+    selectors.saveBtn.disabled = true;
+
+    const questions = await window.TriviaQuestions.fetchQuestions(settings);
+    console.log(`Fetched ${questions.length} questions:`, questions);
+
+    // Store on window so the game screen can access them
+    window.triviaGameData = { questions, settings };
+
+    // TODO: hand off to game screen renderer
+  } catch (err) {
+    console.error("Failed to load questions:", err);
+    alert(`Could not load questions: ${err.message}`);
+    scrollTo(".settings");
+  } finally {
+    selectors.saveBtn.textContent = "Save & Play";
+    selectors.saveBtn.disabled = false;
+  }
+});
 
 selectors.backBtns.forEach((btn) => {
   btn.addEventListener("click", () => scrollTo(".home"));
