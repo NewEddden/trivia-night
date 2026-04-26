@@ -7,8 +7,253 @@
     <title>trivia-night</title>
   </head>
   <body>
-    <section class="home playScreen"></section>
+    <section class="home playScreen">
+      <div class="screen-items">
+        <div class="gameTitle">
+          <span>T</span>
+          <span>r</span>
+          <span>i</span>
+          <span>v</span>
+          <span>i</span>
+          <span>a</span>
+          <span> </span>
+          <span>N</span>
+          <span>i</span>
+          <span>g</span>
+          <span>h</span>
+          <span>t</span>
+        </div>
+        <div class="btn-group">
+          <button class="btn">Start Game</button>
+          <button class="btn">Settings</button>
+          <button class="btn">Scores</button>
+        </div>
+      </div>
+    </section>
+    <section class="game game-Page"></section>
+    <section class="settings">
+      <div class="settings-inner">
+        <div class="settings-header">
+          <button class="back-btn">← Back</button>
+          <h1>Settings</h1>
+        </div>
 
+        <div class="section">
+          <div class="section-label">Game Setup</div>
+          <div class="card">
+            <div class="slider-row">
+              <div class="slider-top">
+                <div class="row-label">Questions</div>
+                <div class="slider-val" id="q-val">20</div>
+              </div>
+              <input
+                type="range"
+                min="5"
+                max="50"
+                step="5"
+                value="20"
+                id="q-slider"
+              />
+            </div>
+            <div class="divider"></div>
+            <div class="slider-row">
+              <div class="slider-top">
+                <div>
+                  <div class="row-label">Time per question</div>
+                  <div class="row-sub">seconds — set to 0 for no limit</div>
+                </div>
+                <div class="slider-val" id="t-val">30s</div>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="60"
+                step="5"
+                value="30"
+                id="t-slider"
+              />
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="row-label">Players</div>
+              <div class="pill-group" id="players">
+                <div class="pill active" data-val="1">1</div>
+                <div class="pill" data-val="2">2</div>
+                <div class="pill" data-val="3">3</div>
+                <div class="pill" data-val="4">4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Difficulty</div>
+          <div class="card">
+            <div class="pill-group" id="difficulty">
+              <div class="pill active green" data-val="easy">Easy</div>
+              <div class="pill active" data-val="medium">Medium</div>
+              <div class="pill active red" data-val="hard">Hard</div>
+              <div class="pill" data-val="mixed">Mixed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Categories</div>
+          <div class="card">
+            <div class="categories-grid" id="categories">
+              <div class="cat-pill active">History</div>
+              <div class="cat-pill active">Science</div>
+              <div class="cat-pill active">Sports</div>
+              <div class="cat-pill active">Pop Culture</div>
+              <div class="cat-pill">Geography</div>
+              <div class="cat-pill">Movies</div>
+              <div class="cat-pill">Music</div>
+              <div class="cat-pill">Technology</div>
+              <div class="cat-pill">Food</div>
+              <div class="cat-pill">Literature</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Scoring</div>
+          <div class="card">
+            <div class="row">
+              <div>
+                <div class="row-label">Speed bonus</div>
+                <div class="row-sub">Extra points for fast answers</div>
+              </div>
+              <div class="toggle on" id="speed-toggle"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div>
+                <div class="row-label">Wrong answer penalty</div>
+                <div class="row-sub">Deduct points for incorrect guesses</div>
+              </div>
+              <div class="toggle" id="penalty-toggle"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div>
+                <div class="row-label">Streak bonus</div>
+                <div class="row-sub">
+                  Multiplier for consecutive correct answers
+                </div>
+              </div>
+              <div class="toggle on" id="streak-toggle"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Answer Format</div>
+          <div class="card">
+            <div class="pill-group" id="format">
+              <div class="pill active blue" data-val="mc">Multiple choice</div>
+              <div class="pill" data-val="tf">True / False</div>
+              <div class="pill" data-val="type">Type in</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Audio</div>
+          <div class="card">
+            <div class="row">
+              <div class="row-label">Sound effects</div>
+              <div class="toggle on" id="sfx-toggle"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="row-label">Music</div>
+              <div class="toggle on" id="music-toggle"></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="save-btn">Save & Play</button>
+      </div>
+    </section>
+    <section class="scores">
+      <div class="scores-inner">
+        <div class="scores-header">
+          <h1>Scores</h1>
+          <p>Round 1 complete &mdash; 20 questions</p>
+        </div>
+
+        <div class="cards-grid">
+          <div class="player-card first">
+            <div class="crown">👑</div>
+            <div class="rank-badge">1st</div>
+            <div class="avatar">W</div>
+            <div class="player-name">Wassi</div>
+            <div class="score-val">1840</div>
+            <div class="score-label">points</div>
+            <div class="stats">
+              <div class="stat-row">
+                <span>Correct</span><span>18 / 20</span>
+              </div>
+              <div class="stat-row"><span>Avg time</span><span>9.2s</span></div>
+              <div class="stat-row"><span>Streak</span><span>x7</span></div>
+            </div>
+          </div>
+
+          <div class="player-card second">
+            <div class="rank-badge">2nd</div>
+            <div class="avatar">I</div>
+            <div class="player-name">Isiah</div>
+            <div class="score-val">1530</div>
+            <div class="score-label">points</div>
+            <div class="stats">
+              <div class="stat-row">
+                <span>Correct</span><span>16 / 20</span>
+              </div>
+              <div class="stat-row">
+                <span>Avg time</span><span>11.4s</span>
+              </div>
+              <div class="stat-row"><span>Streak</span><span>x5</span></div>
+            </div>
+          </div>
+
+          <div class="player-card third">
+            <div class="rank-badge">3rd</div>
+            <div class="avatar">P</div>
+            <div class="player-name">Peter</div>
+            <div class="score-val">1210</div>
+            <div class="score-label">points</div>
+            <div class="stats">
+              <div class="stat-row">
+                <span>Correct</span><span>13 / 20</span>
+              </div>
+              <div class="stat-row">
+                <span>Avg time</span><span>14.1s</span>
+              </div>
+              <div class="stat-row"><span>Streak</span><span>x3</span></div>
+            </div>
+          </div>
+
+          <div class="player-card fourth">
+            <div class="rank-badge">4th</div>
+            <div class="avatar">E</div>
+            <div class="player-name">Edly</div>
+            <div class="score-val">890</div>
+            <div class="score-label">points</div>
+            <div class="stats">
+              <div class="stat-row">
+                <span>Correct</span><span>10 / 20</span>
+              </div>
+              <div class="stat-row">
+                <span>Avg time</span><span>18.7s</span>
+              </div>
+              <div class="stat-row"><span>Streak</span><span>x2</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="back-btn">← Back</button>
+    </section>
     <script src="/js/app.js"></script>
   </body>
 </html>
