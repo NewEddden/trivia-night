@@ -185,7 +185,7 @@ python3 -m http.server 8080
 npx serve .
 
 # Option 3 — VS Code
-# Use the Live Server extension
+# Use the Live Server extension (This is what i do)
 ```
 
 Then visit `http://localhost:8080`.
