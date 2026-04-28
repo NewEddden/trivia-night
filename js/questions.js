@@ -4,7 +4,7 @@
 
 const BASE_URL = "https://opentdb.com/api.php";
 
-// ── Session token (prevents duplicate questions) ──────────────────────────────
+// --------------------------------------- Session token (prevents duplicate questions) --------------------------
 
 let sessionToken = null;
 
@@ -20,12 +20,12 @@ async function fetchSessionToken() {
 async function resetSessionToken() {
   if (!sessionToken) return;
   await fetch(
-    `https://opentdb.com/api_token.php?command=reset&token=${sessionToken}`
+    `https://opentdb.com/api_token.php?command=reset&token=${sessionToken}`,
   );
   console.log("Session token reset.");
 }
 
-// ── Build API URL from current settings ──────────────────────────────────────
+// --------------------------------------- Build API URL from current settings ----------------------------------
 
 function buildApiUrl(settings) {
   const params = new URLSearchParams();
@@ -58,7 +58,7 @@ function buildApiUrl(settings) {
   return `${BASE_URL}?${params.toString()}`;
 }
 
-// ── Decode url3986-encoded strings returned by the API ───────────────────────
+// --------------------------------------- Decode url3986-encoded strings returned by the API ----------------
 
 function decodeField(str) {
   return decodeURIComponent(str);
@@ -75,7 +75,7 @@ function decodeQuestion(q) {
   };
 }
 
-// ── Shuffle helper (Fisher-Yates) ─────────────────────────────────────────────
+// --------------------------------------- Shuffle helper (Fisher-Yates) ---------------------------------------
 
 function shuffle(arr) {
   const a = [...arr];
@@ -86,7 +86,7 @@ function shuffle(arr) {
   return a;
 }
 
-// ── Main fetch — handles multiple categories by splitting calls ───────────────
+// --------------------------------------- Main fetch — handles multiple categories by splitting calls --------
 //
 // settings shape:
 // {
@@ -132,7 +132,7 @@ async function fetchQuestions(settings) {
             type,
           });
           return _fetchFromUrl(url, perCat);
-        })
+        }),
       );
       // Flatten, shuffle, then trim to the requested total
       questions = shuffle(batches.flat()).slice(0, amount);
@@ -149,7 +149,7 @@ async function fetchQuestions(settings) {
   }));
 }
 
-// ── Internal: fetch a single URL and handle response codes ───────────────────
+// ─---------------------------------------─ Internal: fetch a single URL and handle response codes --------------------------
 
 async function _fetchFromUrl(url, requested) {
   const res = await fetch(url);
@@ -166,23 +166,31 @@ async function _fetchFromUrl(url, requested) {
 
     case 1:
       throw new Error(
-        `Not enough questions in the database for this query (requested ${requested}).`
+        `Not enough questions in the database for this query (requested ${requested}).`,
       );
 
     case 2:
-      throw new Error("Invalid API parameters — check category ID, difficulty, or type.");
+      throw new Error(
+        "Invalid API parameters — check category ID, difficulty, or type.",
+      );
 
     case 3:
       // Token missing — refetch and retry once
       console.warn("Session token not found — refetching...");
       await fetchSessionToken();
-      return _fetchFromUrl(url.replace(/&token=[^&]+/, `&token=${sessionToken}`), requested);
+      return _fetchFromUrl(
+        url.replace(/&token=[^&]+/, `&token=${sessionToken}`),
+        requested,
+      );
 
     case 4:
       // Token exhausted — reset and retry once
       console.warn("All questions exhausted for this token — resetting...");
       await resetSessionToken();
-      return _fetchFromUrl(url.replace(/&token=[^&]+/, `&token=${sessionToken}`), requested);
+      return _fetchFromUrl(
+        url.replace(/&token=[^&]+/, `&token=${sessionToken}`),
+        requested,
+      );
 
     case 5:
       // Rate limited — wait 5 seconds and retry
@@ -195,7 +203,7 @@ async function _fetchFromUrl(url, requested) {
   }
 }
 
-// ── Read active settings from the DOM ────────────────────────────────────────
+// --------------------- Read active settings from the DOM ----------------------
 //
 // Call this in app.js when the player clicks Save & Play.
 // Returns a settings object ready to pass into fetchQuestions().
@@ -217,12 +225,18 @@ function readSettings() {
   const timeLimit = parseInt(document.getElementById("t-slider").value, 10);
   const players = parseInt(
     document.querySelector("#players .pill.active")?.dataset.val ?? "1",
-    10
+    10,
   );
 
-  const speedBonus = document.getElementById("speed-toggle").classList.contains("on");
-  const penalty = document.getElementById("penalty-toggle").classList.contains("on");
-  const streakBonus = document.getElementById("streak-toggle").classList.contains("on");
+  const speedBonus = document
+    .getElementById("speed-toggle")
+    .classList.contains("on");
+  const penalty = document
+    .getElementById("penalty-toggle")
+    .classList.contains("on");
+  const streakBonus = document
+    .getElementById("streak-toggle")
+    .classList.contains("on");
 
   return {
     amount,
@@ -237,7 +251,7 @@ function readSettings() {
   };
 }
 
-// ── Exports (accessible globally for app.js) ──────────────────────────────────
+// --------------------------------------- Exports (accessible globally for app.js) ---------------------------------------
 
 window.TriviaQuestions = {
   fetchQuestions,
