@@ -13,15 +13,20 @@ class Player {
     this._bestStreak = 0;
   }
 
-  // ─── Name ───────────────────────────────────
-  get name() { return this._name; }
+  // -------------------------------- Name --------------------------------
+  get name() {
+    return this._name;
+  }
   set name(val) {
-    if (typeof val !== "string" || val.trim() === "") throw new Error("Name must be a non-empty string.");
+    if (typeof val !== "string" || val.trim() === "")
+      throw new Error("Name must be a non-empty string.");
     this._name = val.trim();
   }
 
-  // ─── Score ──────────────────────────────────
-  get score() { return this._score; }
+  // -------------------------------- Score --------------------------------
+  get score() {
+    return this._score;
+  }
   set score(val) {
     if (typeof val !== "number") throw new Error("Score must be a number.");
     this._score = val;
@@ -31,28 +36,39 @@ class Player {
     if (this._score < 0) this._score = 0;
   }
 
-  // ─── Time ───────────────────────────────────
+  // -------------------------------- Time --------------------------------
   get timeAvg() {
     if (this._timeAvg.length === 0) return 0;
     const sum = this._timeAvg.reduce((a, b) => a + b, 0);
     return parseFloat((sum / this._timeAvg.length).toFixed(1));
   }
   recordTime(seconds) {
-    if (typeof seconds === "number" && seconds >= 0) this._timeAvg.push(seconds);
+    if (typeof seconds === "number" && seconds >= 0)
+      this._timeAvg.push(seconds);
   }
 
-  // ─── Streak ─────────────────────────────────
-  get streak() { return this._streak; }
-  get bestStreak() { return this._bestStreak; }
+  // -------------------------------- Streak --------------------------------
+  get streak() {
+    return this._streak;
+  }
+  get bestStreak() {
+    return this._bestStreak;
+  }
   incrementStreak() {
     this._streak++;
     if (this._streak > this._bestStreak) this._bestStreak = this._streak;
   }
-  resetStreak() { this._streak = 0; }
+  resetStreak() {
+    this._streak = 0;
+  }
 
-  // ─── Answer tracking ────────────────────────
-  get correct() { return this._correct; }
-  get total()   { return this._total; }
+  // -------------------------------- Answer tracking --------------------------------
+  get correct() {
+    return this._correct;
+  }
+  get total() {
+    return this._total;
+  }
   get accuracy() {
     if (this._total === 0) return "0 / 0";
     return `${this._correct} / ${this._total}`;
@@ -62,7 +78,7 @@ class Player {
     if (isCorrect) this._correct++;
   }
 
-  // ─── Summary ────────────────────────────────
+  // -------------------------------- Summary --------------------------------
   getSummary() {
     return {
       name: this._name,
@@ -90,9 +106,9 @@ class Player {
 class GameSession {
   constructor(questions, settings, players) {
     this.questions = questions;
-    this.settings  = settings;
-    this.players   = players;           // Player[]
-    this.qIndex    = 0;
+    this.settings = settings;
+    this.players = players; // Player[]
+    this.qIndex = 0;
     this.timeRemaining = settings.timeLimit || 0;
     this._timerInterval = null;
   }
@@ -109,12 +125,7 @@ class GameSession {
     this.qIndex++;
   }
 
-  // ─── Scoring ──────────────────────────────────
-  //
-  // Call once per question after host selects who got it right.
-  //   correctPlayers  — Player[] who got it right
-  //   wrongPlayers    — Player[] explicitly marked wrong (penalty mode)
-  //   timeUsed        — seconds elapsed when revealed (0 if no timer)
+  // -------------------------------- Scoring --------------------------------
 
   awardPoints({ correctPlayers = [], wrongPlayers = [], timeUsed = 0 } = {}) {
     const { timeLimit, speedBonus, penalty, streakBonus } = this.settings;
@@ -157,7 +168,7 @@ class GameSession {
     }
   }
 
-  // ─── Timer ────────────────────────────────────
+  // -------------------------------- Timer --------------------------------
 
   startTimer(onTick, onExpire) {
     if (!this.settings.timeLimit) return;
@@ -179,18 +190,21 @@ class GameSession {
     }
   }
 
-  // ─── Persist / restore ────────────────────────
+  // -------------------------------- Persist / restore --------------------------------
 
   save() {
     const snapshot = {
-      inProgress:    true,
+      inProgress: true,
       questionIndex: this.qIndex,
-      settings:      this.settings,
-      questions:     this.questions,
-      players:       this.players.map((p) => ({
-        name: p.name, score: p.score,
-        correct: p._correct, total: p._total,
-        streak: p._streak, bestStreak: p._bestStreak,
+      settings: this.settings,
+      questions: this.questions,
+      players: this.players.map((p) => ({
+        name: p.name,
+        score: p.score,
+        correct: p._correct,
+        total: p._total,
+        streak: p._streak,
+        bestStreak: p._bestStreak,
         timeAvg: p._timeAvg,
       })),
     };
@@ -214,5 +228,5 @@ class GameSession {
   }
 }
 
-window.Player      = Player;
+window.Player = Player;
 window.GameSession = GameSession;
